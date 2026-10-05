@@ -3,16 +3,7 @@ import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.subheader("📷 Camera Verification")
-st.caption("Please take a test snapshot to grant and verify browser camera permissions.")
 
-test_photo = st.camera_input("Take Test Snapshot")
-
-if test_photo:
-    st.success("✅ Camera verified successfully!")
-    st.session_state.camera_ok = True
-else:
-    st.warning("⚠️ Please take a test photo above to complete the camera check.")
 
 # Hide header link icons
 st.markdown(
@@ -144,6 +135,17 @@ components.html(
     """,
     height=160
 )
+
+st.subheader("📷 Camera Verification")
+st.caption("Please take a test snapshot to grant and verify browser camera permissions.")
+
+test_photo = st.camera_input("Take Test Snapshot")
+
+if test_photo:
+    st.success("✅ Camera verified successfully!")
+    st.session_state.camera_ok = True
+else:
+    st.warning("⚠️ Please take a test photo above to complete the camera check.")
 
 st.divider()
 st.subheader("Diagnostic Criteria Breakdown")

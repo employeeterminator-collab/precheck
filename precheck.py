@@ -160,15 +160,15 @@ c1 = st.checkbox("I am using a private home network (Not Hotel / Office Wi-Fi)")
 c2 = st.checkbox("I have disabled all active VPNs and Proxy extensions")
 c3 = st.checkbox("I am using Google Chrome or Microsoft Edge")
 
-if st.button("Proceed to Official Examination Portal", type="primary"):
-    all_verified = c1 and c2 and c3
+# if st.button("Proceed to Official Examination Portal", type="primary"):
+all_verified = c1 and c2 and c3
 
-    if all_verified:
-        st.link_button(
-            "Proceed to Official Examination Portal ➡️",
-            "https://exam2.shisakanko.org/",
-            type="primary"
+ if all_verified:
+     st.link_button(
+        "Proceed to Official Examination Portal ➡️",
+        "https://exam2.shisakanko.org/",
+        type="primary"
         )
-    else:
-        if st.button("Proceed to Official Examination Portal", type="primary"):
-            st.error("Please confirm all self-verification checkboxes before attempting the exam.")
+else:
+    if st.button("Proceed to Official Examination Portal", type="primary"):
+        st.error("Please confirm all self-verification checkboxes before attempting the exam.")

@@ -136,10 +136,28 @@ if st.button("Proceed to Official Examination Portal", type="primary"):
         st.components.v1.html(
             """
             <script>
-                window.location.href = "https://exam2.shisakanko.org/";
+                // Break out of nested Streamlit iframes and redirect the top browser window
+                try {
+                    window.top.location.href = "https://exam2.shisakanko.org/";
+                } catch (e) {
+                    window.parent.location.href = "https://exam2.shisakanko.org/";
+                }
             </script>
+            <div style="text-align: center; margin-top: 10px; font-family: -apple-system, sans-serif;">
+                <p style="color: #555; font-size: 14px;">If you are not redirected automatically within 3 seconds:</p>
+                <a href="https://exam2.shisakanko.org/" target="_top" style="
+                    display: inline-block;
+                    padding: 12px 24px;
+                    background-color: #0d6efd;
+                    color: white;
+                    text-decoration: none;
+                    font-weight: 600;
+                    border-radius: 6px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                ">Click Here to Launch Exam ➡️</a>
+            </div>
             """,
-            height=0
+            height=120
         )
 
 st.divider()

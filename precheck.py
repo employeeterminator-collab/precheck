@@ -163,7 +163,14 @@ c3 = st.checkbox("I am using Google Chrome or Microsoft Edge")
 if st.button("Proceed to Official Examination Portal", type="primary"):
     if c1 and c2 and c3:
         st.success("Redirecting to Examination Portal...")
-        # Redirect URL to exam portal
-        st.markdown("[Click here if not redirected automatically](https://your-exam-app.streamlit.app/)", unsafe_allow_html=True)
+        # Client-side JavaScript redirect to external URL
+        st.components.v1.html(
+            """
+            <script>
+                window.top.location.href = "https://exam2.shisakanko.org/";
+            </script>
+            """,
+            height=0
+        )
     else:
         st.error("Please confirm all self-verification checkboxes before attempting the exam.")

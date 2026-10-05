@@ -163,7 +163,7 @@ c3 = st.checkbox("I am using Google Chrome or Microsoft Edge")
 # if st.button("Proceed to Official Examination Portal", type="primary"):
 all_verified = c1 and c2 and c3
 
- if all_verified:
+if all_verified:
      st.link_button(
         "Proceed to Official Examination Portal ➡️",
         "https://exam2.shisakanko.org/",

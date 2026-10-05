@@ -118,46 +118,37 @@ with col2:
 
 st.divider()
 
-# Candidate Verification & Access Gate
+# Initialize pass status in session state
+if "passed_precheck" not in st.session_state:
+    st.session_state.passed_precheck = False
+
+# Step 3: Candidate Verification & Access Gate
 st.subheader("3. Final Verification & Launch")
 
 c1 = st.checkbox("I am using a private home network (Not Hotel / Public / Corporate Wi-Fi)")
 c2 = st.checkbox("I have disabled all active VPNs and proxy browser extensions")
 c3 = st.checkbox("I am using a desktop or laptop computer with Google Chrome or Microsoft Edge")
 
-# Proceed Action Gate
-if st.button("Proceed to Official Examination Portal", type="primary"):
-    if not st.session_state.camera_verified:
+# Verification Trigger
+if st.button("Verify System Requirements", type="primary"):
+    if not st.session_state.get("camera_verified", False):
         st.error("❌ System Readiness Failed: You must take a test snapshot above to verify your camera before proceeding.")
+        st.session_state.passed_precheck = False
     elif not (c1 and c2 and c3):
         st.error("❌ Please confirm all self-verification checkboxes before attempting the exam.")
+        st.session_state.passed_precheck = False
     else:
-        st.success("System verified! Redirecting to the Examination Portal...")
-        st.components.v1.html(
-            """
-            <script>
-                // Break out of nested Streamlit iframes and redirect the top browser window
-                try {
-                    window.top.location.href = "https://exam2.shisakanko.org/";
-                } catch (e) {
-                    window.parent.location.href = "https://exam2.shisakanko.org/";
-                }
-            </script>
-            <div style="text-align: center; margin-top: 10px; font-family: -apple-system, sans-serif;">
-                <p style="color: #555; font-size: 14px;">If you are not redirected automatically within 3 seconds:</p>
-                <a href="https://exam2.shisakanko.org/" target="_top" style="
-                    display: inline-block;
-                    padding: 12px 24px;
-                    background-color: #0d6efd;
-                    color: white;
-                    text-decoration: none;
-                    font-weight: 600;
-                    border-radius: 6px;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                ">Click Here to Launch Exam ➡️</a>
-            </div>
-            """,
-            height=120
-        )
+        st.success("✅ System Verification Passed! Click below to enter the examination.")
+        st.session_state.passed_precheck = True
+
+# Native Streamlit Link Button (Bypasses iframe security blocks)
+if st.session_state.passed_precheck:
+    st.divider()
+    st.link_button(
+        "🚀 Proceed to Official Examination Portal ➡️",
+        "https://exam2.shisakanko.org/",
+        type="primary",
+        use_container_width=True
+    )
 
 st.divider()

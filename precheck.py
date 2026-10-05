@@ -174,4 +174,4 @@ else:
         st.error("Please confirm all self-verification checkboxes before attempting the exam.")
 
 
-st.mark("----")
+st.divider()

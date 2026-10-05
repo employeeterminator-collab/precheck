@@ -3,6 +3,23 @@ import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
+# Hide header link icons
+st.markdown(
+    """
+    <style>
+    /* Hide anchor link icons next to titles and headers */
+    [data-testid="stHeaderActionElements"] {
+        display: none !important;
+    }
+    a.header-anchor {
+        display: none !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 st.set_page_config(
     page_title="Shisa Kanko Examination - System Readiness Check",
     page_icon="🛠️",

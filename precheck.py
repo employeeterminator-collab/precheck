@@ -161,16 +161,14 @@ c2 = st.checkbox("I have disabled all active VPNs and Proxy extensions")
 c3 = st.checkbox("I am using Google Chrome or Microsoft Edge")
 
 if st.button("Proceed to Official Examination Portal", type="primary"):
-    if c1 and c2 and c3:
-        st.success("Redirecting to Examination Portal...")
-        # Client-side JavaScript redirect to external URL
-        st.components.v1.html(
-            """
-            <script>
-                window.top.location.href = "https://exam2.shisakanko.org/";
-            </script>
-            """,
-            height=0
-        )
-    else:
+    all_verified = c1 and c2 and c3
+
+if all_verified:
+    st.link_button(
+        "Proceed to Official Examination Portal ➡️",
+        "https://exam2.shisakanko.org/",
+        type="primary"
+    )
+else:
+    if st.button("Proceed to Official Examination Portal", type="primary"):
         st.error("Please confirm all self-verification checkboxes before attempting the exam.")

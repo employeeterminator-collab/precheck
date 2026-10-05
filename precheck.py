@@ -172,3 +172,4 @@ if all_verified:
 else:
     if st.button("Proceed to Official Examination Portal", type="primary"):
         st.error("Please confirm all self-verification checkboxes before attempting the exam.")
+st.mark("----")

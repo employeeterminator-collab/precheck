@@ -136,6 +136,10 @@ if st.button("Proceed to Official Examination Portal", type="primary"):
         st.components.v1.html(
             """
             <script>
-                window.location.href = "
+                window.location.href = "https://exam2.shisakanko.org/";
+            </script>
+            """,
+            height=0
+        )
 
 st.divider()
